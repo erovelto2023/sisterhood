@@ -123,13 +123,14 @@ export async function createPost(data: any) {
     const wordCount = data.content.replace(/<[^>]*>/g, '').split(/\s+/).length;
     const readingTime = Math.ceil(wordCount / 200);
 
-    const post = await BlogPost.create({
+    const newPost = new BlogPost({
         ...data,
         slug: uniqueSlug,
         author: user._id,
         readingTime,
         publishDate: data.status === 'published' ? new Date() : undefined
     });
+    const post = await newPost.save();
 
     if (post.category) {
         await BlogCategory.findByIdAndUpdate(post.category, { $inc: { count: 1 } });
