@@ -206,7 +206,7 @@ export async function createListingConversation(listingId: string, content: stri
     if (!conversation) {
         conversation = await Conversation.create({
             participants: [sender._id, listing.seller._id],
-            unreadCounts: { [sender._id]: 0, [listing.seller._id]: 0 },
+            unreadCounts: { [sender._id.toString()]: 0, [listing.seller._id.toString()]: 0 },
             isGroup: false,
             context: {
                 type: 'marketplace_listing',
