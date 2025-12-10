@@ -154,11 +154,11 @@ export async function markLessonComplete(lessonId: string, courseId: string) {
     try {
         // 1. Lesson Completion Trigger
         const { checkAndAwardBadges } = await import('@/lib/actions/badge.actions');
-        await checkAndAwardBadges(user._id, 'lesson_completion', { courseId });
+        await checkAndAwardBadges(user._id.toString(), 'lesson_completion', { courseId });
 
         if (enrollment.progress === 100) {
             // 2. Course Completion Trigger
-            await checkAndAwardBadges(user._id, 'course_completion', { courseId });
+            await checkAndAwardBadges(user._id.toString(), 'course_completion', { courseId });
         }
     } catch (error) {
         console.error('Error awarding badges:', error);
