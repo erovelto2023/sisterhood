@@ -7,6 +7,7 @@ export interface IPost extends Document {
     author: mongoose.Types.ObjectId;
     recipient?: mongoose.Types.ObjectId; // For wall posts
     space?: mongoose.Types.ObjectId; // For community space posts
+    bookClub?: mongoose.Types.ObjectId; // For book club discussions
     type: 'post' | 'question' | 'poll' | 'announcement';
     isPinned: boolean;
     isLocked: boolean;
